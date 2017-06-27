@@ -8,4 +8,10 @@
     tools:context="com.ygaps.mybackground.CalendarActivity"
     tools:showIn="@layout/activity_calendar">
 
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
 </android.support.constraint.ConstraintLayout>
