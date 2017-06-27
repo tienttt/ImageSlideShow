@@ -3,14 +3,14 @@ package com.ygaps.mybackground;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private String lang;
 
-    private static class CONST_LANG{
+    public static class CONST_LANG{
         public static String EN = "en";
         public static String VI = "vi";
     }
@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         } else if(id == R.id.action_calendar) {
             Intent intent = new Intent(this, CalendarActivity.class);
             startActivity(intent);
+            return true;
+        } else if(id == R.id.action_lang){
+            onChangeLang();
             return true;
         }
 
@@ -275,5 +278,22 @@ public class MainActivity extends AppCompatActivity {
 
         pre = pre + 1;
         getImage();
+    }
+
+    public void onChangeLang(){
+        if(CONST_LANG.VI.equals(lang)){
+            lang = CONST_LANG.EN;
+        }else{
+            lang = CONST_LANG.VI;
+        }
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.Saved_MyBackground_Lang), lang);
+        editor.commit();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
