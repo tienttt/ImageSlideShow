@@ -232,4 +232,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onPre(View v){
+        pre = pre - 1;
+        getImage();
+    }
+
+    public void onNext(View v){
+        if(pre == 0){
+            Toast.makeText(MainActivity.this, getString(R.string.text_today), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        pre = pre + 1;
+        getImage();
+    }
 }

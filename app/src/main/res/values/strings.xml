@@ -11,4 +11,6 @@
     <string name="text_success_saveas">Image has been saved</string>
 
     <string name="text_success_background">The background has been changed</string>
+
+    <string name="text_today">Today!!! Waiting ...</string>
 </resources>
