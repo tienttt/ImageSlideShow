@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             onBackground(null);
             return true;
         } else if(id == R.id.action_calendar) {
+            Intent intent = new Intent(this, CalendarActivity.class);
+            startActivity(intent);
             return true;
         }
 
