@@ -1,8 +1,12 @@
 package com.ygaps.mybackground;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +22,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String deviceID;
     int pre = 0;
     String name;
+    boolean isLoadingFinish = false;
 
     private TextView tvDay;
     private ImageView imageView;
@@ -132,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                                 name = "1photo1day-" + camImgFilename;
                             }
                             Picasso.with(MainActivity.this).load(url).into(imageView);
+                            isLoadingFinish = true;
                             MainActivity.this.runOnUiThread(new Runnable() {
                                 public void run() {
                                     tvDay.setText(curDate);
@@ -156,5 +164,46 @@ public class MainActivity extends AppCompatActivity {
                 processDialog.cancel();
             }
         });
+    }
+
+    public void onSaveAs(View v) {
+        if (isLoadingFinish == true) {
+            imageView.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
+
+            File sdCard = Environment.getExternalStorageDirectory();
+            File dir = new File(sdCard.getAbsolutePath() + "/onephotooneday");
+            dir.mkdirs();
+
+            File file = new File("/sdcard/onephotooneday/" + name);
+            try {
+                if (file.exists())
+                    file.delete();
+                file.createNewFile();
+                FileOutputStream ostream = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+                galleryAddPic(file);
+                ostream.close();
+                Toast.makeText(MainActivity.this, getString(R.string.text_success_saveas), Toast.LENGTH_SHORT).show();
+
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void galleryAddPic(File photo) {
+        if (photo != null) {
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            Uri contentUri = Uri.fromFile(photo);
+            mediaScanIntent.setData(contentUri);
+            this.sendBroadcast(mediaScanIntent);
+        }
     }
 }
