@@ -9,4 +9,6 @@
     <string name="text_no_image">No image ...</string>
 
     <string name="text_success_saveas">Image has been saved</string>
+
+    <string name="text_success_background">The background has been changed</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.ygaps.mybackground;
 
 import android.app.ProgressDialog;
+import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -24,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -92,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_background) {
+            onBackground(null);
+            return true;
+        } else if(id == R.id.action_calendar) {
             return true;
         }
 
@@ -204,6 +209,27 @@ public class MainActivity extends AppCompatActivity {
             Uri contentUri = Uri.fromFile(photo);
             mediaScanIntent.setData(contentUri);
             this.sendBroadcast(mediaScanIntent);
+        }
+    }
+
+    public void onBackground(View v) {
+        if (isLoadingFinish == true) {
+            imageView.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
+            WallpaperManager manager = WallpaperManager.getInstance(this);
+            try {
+                manager.setBitmap(bitmap);
+                Toast.makeText(MainActivity.this, getString(R.string.text_success_background), Toast.LENGTH_SHORT).show();
+
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
         }
     }
 }
