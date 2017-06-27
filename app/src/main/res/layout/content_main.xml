@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:textColor="#000000" />
 
-        <ImageView
+        <it.sephiroth.android.library.imagezoom.ImageViewTouch
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imageView"

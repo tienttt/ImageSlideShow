@@ -31,6 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isLoadingFinish = false;
 
     private TextView tvDay;
-    private ImageView imageView;
+    private ImageViewTouch imageView;
     private String lang;
 
     public static class CONST_LANG{
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         processDialog.setCancelable(false);
 
         tvDay=(TextView)this.findViewById(R.id.tvDate);
-        imageView = (ImageView) this.findViewById(R.id.imageView);
+        imageView = (ImageViewTouch) this.findViewById(R.id.imageView);
 
         Retrofit restAdapter = new Retrofit.Builder()
                 .baseUrl("http://yb.ygaps.com")
