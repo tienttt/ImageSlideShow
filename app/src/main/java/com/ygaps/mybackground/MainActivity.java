@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getImage(){
         final String curDate = getCurDateString(pre);
+        tvDay.setText(curDate);
         processDialog.show();
 
         int isDate;
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     String url = null;
                     if(s.isEmpty() == true){
                         Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
+                        imageView.setImageResource(0);
                     }
                     else {
                         try {
@@ -145,11 +147,11 @@ public class MainActivity extends AppCompatActivity {
                             }
                             Picasso.with(MainActivity.this).load(url).into(imageView);
                             isLoadingFinish = true;
-                            MainActivity.this.runOnUiThread(new Runnable() {
-                                public void run() {
-                                    tvDay.setText(curDate);
-                                }
-                            });
+//                            MainActivity.this.runOnUiThread(new Runnable() {
+//                                public void run() {
+//                                    tvDay.setText(curDate);
+//                                }
+//                            });
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.d("abc", e.toString());
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     //Hiển thị lỗi
                     Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
+                    imageView.setImageResource(0);
                 }
                 processDialog.cancel();
             }
@@ -166,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<MBGResponse> call, Throwable t) {
                 String s;
                 s = "";
+                imageView.setImageResource(0); 
                 processDialog.cancel();
             }
         });
