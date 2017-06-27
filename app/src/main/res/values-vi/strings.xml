@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MyBackground</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="background">Hình nền</string>
+    <string name="Calendar">Lịch</string>
+    <string name="next">Ảnh sau</string>
+    <string name="saveas">Lưu</string>
+    <string name="pre">Ảnh trước</string>
+    <string name="text_no_image">Không có ảnh ...</string>
+
+    <string name="text_success_saveas">Ảnh đã được lưu</string>
+
+    <string name="text_success_background">Hình nền đã được thay đổi</string>
+
+    <string name="text_today">Vui lòng chờ ...</string>
+    <string name="title_activity_calendar">Lịch</string>
+
+    <string name="action_lang">English</string>
+
+    <string name="Saved_MyBackground_Lang">Saved_MyBackground_Lang</string>
+</resources>

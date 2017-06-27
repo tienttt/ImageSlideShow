@@ -14,4 +14,7 @@
 
     <string name="text_today">Today!!! Waiting ...</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+
+    <string name="action_lang">Tiếng Việt</string>
+    <string name="Saved_MyBackground_Lang">Saved_MyBackground_Lang</string>
 </resources>

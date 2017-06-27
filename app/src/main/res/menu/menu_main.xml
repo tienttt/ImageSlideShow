@@ -6,4 +6,6 @@
         android:orderInCategory="100" app:showAsAction="always" />
     <item android:id="@+id/action_calendar" android:title="@string/Calendar"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_lang" android:title="@string/action_lang"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>
