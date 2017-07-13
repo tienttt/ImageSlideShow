@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         } else if(id == R.id.action_calendar) {
             Intent intent = new Intent(this, CalendarActivity.class);
             startActivity(intent);
+            //Man hinh main 1, man hinh lich
             return true;
         } else if(id == R.id.action_lang){
             onChangeLang();
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     String url = null;
                     if(s.isEmpty() == true){
                         Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
-                        imageView.setImageResource(0);
+                        imageView.setImageBitmap(null);
                     }
                     else {
                         try {
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     //Hiển thị lỗi
                     Toast.makeText(MainActivity.this, getString(R.string.text_no_image), Toast.LENGTH_SHORT).show();
-                    imageView.setImageResource(0);
+                    imageView.setImageBitmap(null);
                 }
                 processDialog.cancel();
             }
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<MBGResponse> call, Throwable t) {
                 String s;
                 s = "";
-                imageView.setImageResource(0); 
+                imageView.setImageBitmap(null);
                 processDialog.cancel();
             }
         });
